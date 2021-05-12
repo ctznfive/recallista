@@ -13,6 +13,7 @@ import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
 public class ChallengeGeneratorServiceTest {
+
     private ChallengeGeneratorService challengeGeneratorService;
 
     @Spy

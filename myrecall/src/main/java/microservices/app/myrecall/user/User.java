@@ -10,6 +10,7 @@ import lombok.*;
 @EqualsAndHashCode
 @AllArgsConstructor
 public class User {
+
     private Long id;
     private String alias;
 }

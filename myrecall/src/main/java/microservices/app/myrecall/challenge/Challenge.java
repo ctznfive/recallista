@@ -10,6 +10,7 @@ import lombok.*;
 @EqualsAndHashCode
 @AllArgsConstructor
 public class Challenge {
+
     private int factorA;
     private int factorB;
 }
