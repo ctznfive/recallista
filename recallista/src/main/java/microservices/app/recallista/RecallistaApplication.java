@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MyrecallApplication {
+public class RecallistaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MyrecallApplication.class, args);
+		SpringApplication.run(RecallistaApplication.class, args);
 	}
 
 }
