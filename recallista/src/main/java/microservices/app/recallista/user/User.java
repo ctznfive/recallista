@@ -2,15 +2,25 @@ package microservices.app.recallista.user;
 
 import lombok.*;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
- * This class stores information to identify the user.
+ * Stores information to identify the user.
  */
-@Getter
-@ToString
-@EqualsAndHashCode
+@Entity
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
+    @Id
+    @GeneratedValue
     private Long id;
     private String alias;
+
+    public User(final String userAlias) {
+        this(null, userAlias);
+    }
 }
