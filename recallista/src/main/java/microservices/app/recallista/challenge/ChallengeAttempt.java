@@ -3,17 +3,24 @@ package microservices.app.recallista.challenge;
 import lombok.*;
 import microservices.app.recallista.user.User;
 
+import javax.persistence.*;
+
 /**
- * This class identifies the attempt from a {@link User} to solve a challenge.
+ * Identifies the attempt from a {@link User} to solve a challenge.
  */
-@Getter
-@ToString
-@EqualsAndHashCode
+@Entity
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class ChallengeAttempt {
 
+    @Id
+    @GeneratedValue
     private Long id;
-    private Long userId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID")
+    private User user;
 
     private int factorA;
     private int factorB;
