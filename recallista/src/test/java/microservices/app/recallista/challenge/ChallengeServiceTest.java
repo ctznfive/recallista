@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.BDDAssertions.then;
@@ -48,8 +49,7 @@ public class ChallengeServiceTest {
         verify(attemptRepository).save(resultAttempt);
     }
 
-    @Test
-    public void checkWrongAttemptTest() {
+    @Test public void checkWrongAttemptTest() {
         // given
         given(attemptRepository.save(any())).will(returnsFirstArg());
         ChallengeAttemptDTO attemptDTO =
@@ -83,5 +83,23 @@ public class ChallengeServiceTest {
         then(resultAttempt.getUser()).isEqualTo(existingUser);
         verify(userRepository, never()).save(any());
         verify(attemptRepository).save(resultAttempt);
+    }
+
+    @Test
+    public void retrieveLastAttemptsTest() {
+        // given
+        User user = new User("john_doe");
+        ChallengeAttempt challengeAttempt1 = new ChallengeAttempt(1L, user, 50, 60, 3010, false);
+        ChallengeAttempt challengeAttempt2 = new ChallengeAttempt(2L, user, 50, 60, 3050, false);
+        List<ChallengeAttempt> lastAttempts = List.of(challengeAttempt1, challengeAttempt2);
+        given(attemptRepository.findTop10ByUserAliasOrderByIdDesc("john_doe"))
+                .willReturn(lastAttempts);
+
+        // when
+        List<ChallengeAttempt> challengeAttemptList =
+                challengeService.getStatsForUser("john_doe");
+
+        // then
+        then(challengeAttemptList).isEqualTo(lastAttempts);
     }
 }
