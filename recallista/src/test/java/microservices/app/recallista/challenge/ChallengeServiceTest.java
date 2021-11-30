@@ -49,7 +49,8 @@ public class ChallengeServiceTest {
         verify(attemptRepository).save(resultAttempt);
     }
 
-    @Test public void checkWrongAttemptTest() {
+    @Test
+    public void checkWrongAttemptTest() {
         // given
         given(attemptRepository.save(any())).will(returnsFirstArg());
         ChallengeAttemptDTO attemptDTO =
