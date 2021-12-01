@@ -6,6 +6,8 @@ import microservices.app.recallista.user.User;
 import microservices.app.recallista.user.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @RequiredArgsConstructor
 @Service
@@ -41,5 +43,10 @@ public class ChallengeServiceImpl implements ChallengeService {
         ChallengeAttempt storedAttempt = attemptRepository.save(checkedAttempt);
 
         return storedAttempt;
+    }
+
+    @Override
+    public List<ChallengeAttempt> getStatsForUser(final String userAlias) {
+        return attemptRepository.findTop10ByUserAliasOrderByIdDesc(userAlias);
     }
 }
